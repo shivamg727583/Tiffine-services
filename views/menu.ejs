@@ -1,0 +1,113 @@
+<%- include('./partials/header') %>
+
+  <main class="container mx-auto px-6 py-24 min-h-screen">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Category Filters -->
+      <div class="col-span-1 md:col-span-1 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-lg font-semibold mb-4">Filter Options</h2>
+        <form method="GET" action="/products/filter">
+        <!-- Category Filter -->
+        <div class="mb-6">
+          <h3 class="text-md font-medium mb-2">Categories</h3>
+          <div class="space-y-2">
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-orange-500">
+              <span class="ml-2">Vegetarian</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-orange-500">
+              <span class="ml-2">Non-Vegetarian</span>
+            </label>
+          </div>
+        </div>
+      
+        <!-- Price Filter -->
+        <div class="mb-6">
+          <h3 class="text-md font-medium mb-2">Price</h3>
+          <div class="space-y-2">
+            <label class="inline-flex items-center">
+              <input type="radio" name="price" value="asc" class="form-radio text-orange-500">
+              <span class="ml-2">Price: Low to High</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" name="price" value="desc" class="form-radio text-orange-500">
+              <span class="ml-2">Price: High to Low</span>
+            </label>
+          </div>
+        </div>
+      
+        <!-- Meal Type Filter -->
+        <div class="mb-6">
+          <h3 class="text-md font-medium mb-2">Meal Type</h3>
+          <div class="space-y-2">
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-orange-500">
+              <span class="ml-2">Breakfast</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-orange-500">
+              <span class="ml-2">Lunch</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-orange-500">
+              <span class="ml-2">Dinner</span>
+            </label>
+          </div>
+        </div>
+      
+        <!-- Preferred Vendors Filter -->
+        <div>
+          <h3 class="text-md font-medium mb-2">Preferred Vendors</h3>
+          <div class="space-y-2">
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-orange-500">
+              <span class="ml-2">Top Rated</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox text-orange-500">
+              <span class="ml-2">Nearby</span>
+            </label>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded">Apply Filters</button>
+        </div>
+      </form>
+      </div>
+      <!-- Meal Cards -->
+      <div class="col-span-2 md:col-span-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <% foods.forEach(food=> { %>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="data:image/jpeg;base64,<%= food.food_image %>" alt="Meal" class="w-full h-48 object-cover">
+              <div class="p-4">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                  <%= food. food_name %>
+                </h3>
+                <p class="text-sm text-gray-600 mb-2">
+                  <%= food. food_description %>
+                </p>
+                <h5 class="text-sm text-gray-600 mb-2">vendor: <%= food.vendorId.business_name %>
+                </h5>
+                <div class="flex items-center justify-between">
+                  <p class="text-lg font-bold text-orange-500">₹<%= food.price %>
+                  </p>
+                  <a href="/users/addToCart/<%= food._id  %>"> <button
+                      class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500">Add
+                      to Cart</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+            <% }); %>
+
+
+        </div>
+
+      </div>
+  </main>
+
+
+  <%- include('./partials/footer') %>

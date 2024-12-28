@@ -1,0 +1,72 @@
+<%- include('../partials/header') %>
+
+
+
+    <div class="container min-h-screen mt-20 flex">
+       
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+            <div class="md:flex">
+                <div class="md:flex-shrink-0">
+                    <!-- Placeholder for Vendor's Profile Picture -->
+                    <img class="h-48 w-48 object-cover rounded-full mt-2 md: md:w-48 bg-blue-600" src="data:image/jpeg;base64,<%= vendor.profilePicture %>" alt="Vendor Profile Picture">
+                </div>
+                <div class="p-8">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Vendor Profile</div>
+                    <h2 class="block mt-1 text-lg leading-tight font-medium text-black">Welcome, <%= vendor.owner_name %>!</h2>
+                    <p class="mt-2 text-gray-500">Here you can view and manage your profile details.</p>
+
+                    <div class="mt-4">
+                        <h3 class="text-md font-bold text-gray-700">Business Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                            <div>
+                                <p class="font-semibold text-gray-700">Business Name:</p>
+                                <p class="text-gray-500"><%= vendor.business_name %></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Email:</p>
+                                <p class="text-gray-500"><%= vendor.email %></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Phone:</p>
+                                <p class="text-gray-500"><%= vendor.phone %></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Address:</p>
+                                <p class="text-gray-500"><%= vendor.address %>, <%= vendor.city %>, <%= vendor.state %>, <%= vendor.pincode %></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">GST Number:</p>
+                                <p class="text-gray-500"><%= vendor.gst_number %></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Experience:</p>
+                                <p class="text-gray-500"><%= vendor.experience %> years</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h3 class="text-md font-bold text-gray-700">Cuisine and Licensing</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                            <div>
+                                <p class="font-semibold text-gray-700">Cuisine Type:</p>
+                                <p class="text-gray-500 capitalize"><%= vendor.cuisine %></p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-700">Business License:</p>
+                                <p class="text-gray-500"><%= vendor.business_license %></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <a href="/vendors/profile/edit" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

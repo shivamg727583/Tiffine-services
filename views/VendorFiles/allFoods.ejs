@@ -1,0 +1,51 @@
+
+
+<%- include('../partials/header')  %>
+
+
+    <!-- Sidebar -->
+    <div class="flex min-h-screen mt-16 px-3">
+       
+
+     
+
+            <!-- Manage Foods Section -->
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold mb-6 text-center my-2">Manage Foods</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-3">
+
+
+                  <% foods.forEach((food)=>{ %>
+                    <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-95 transition-all ease-in-out">
+                            <div class="img w-full bg-red-600 flex items-center justfy-center w-100 h-[10rem] overflow-hidden rounded-lg">
+                                <img src="data:image/jpeg;base64,<%= food.food_image %>" alt="Food Image" class="w-full h-full object-cover ">
+                            </div>
+                            <h3 class="text-lg font-bold"><%= food.food_name  %></h3>
+                            <p class="text-gray-600"><%= food.food_description  %></p>
+                            <h5 class="text-md font-medium"> ₹ <%= food.price  %></h5>
+                            <h4 class="text-md capitalize">cuisine_type : <%= food.cuisine_type  %></h4>
+                    
+
+                            <h6 class="text-sm mt-1">Created At : <%= new Date(food.createdAt).toLocaleDateString('en-US', {
+                                year: 'numeric', month: 'long', day: 'numeric' }) %></h6>
+                            
+                       
+                       <a href="/vendors/food/edit/<%= food._id  %>"> <button class="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Edit</button></a>
+                      <a href="/vendors/food/delete/<%= food._id  %>">  <button class="mt-4 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">Delete</button></a>
+                    </div>
+
+
+
+               <%   })%>
+
+                  
+                    
+                    <!-- Repeat similar blocks for other food items -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+
+</body>
+</html>

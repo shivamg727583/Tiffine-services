@@ -1,0 +1,75 @@
+<%- include('../partials/header')  %>
+
+    
+    <div class="container mx-auto px-4 py-8 mt-24 relative min-h-screen">
+        <a href="/admin" class="p-1 bg-gray-200 rounded-full"> <i class="ri-arrow-left-line"></i></a>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Manage Users</h1>
+        
+        <% if (users.length > 0) { %>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg shadow-md">
+                    <thead>
+                        <tr class="bg-gray-800 text-white">
+                            <th class="py-3 px-4 text-left">User ID</th>
+                            <th class="py-3 px-4 text-left">Name</th>
+                            <th class="py-3 px-4 text-left">Email</th>
+                            <th class="py-3 px-4 text-left">CartItems</th>
+                            <th class="py-3 px-4 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <% users.forEach((user, index) => { %>
+                            <tr class="user-row border-b hover:bg-gray-100 hidden">
+                                <td class="py-3 px-4"><%= user.id %></td>
+                                <td class="py-3 px-4 capitalize"><%= user.first_name %> <%= user.last_name %></td>
+                                <td class="py-3 px-4"><%= user.email %></td>
+                                <td class="py-3 px-4"><%= user.cart.length %></td>
+                                <td class="py-3 px-4 text-center">
+                                    <a href="/admin/delete-user/<%= user.id %>" class="text-red-500 hover:underline" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-center mt-6">
+                <button id="view-more" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">View More</button>
+            </div>
+        <% } else { %>
+            <p class="text-center text-gray-600 mt-8">No users available.</p>
+        <% } %>
+    </div>
+
+
+
+
+
+<%- include('../partials/footer')  %>
+<script>
+    // JavaScript to handle "View More" functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const itemsPerPage = 10; // Number of users to show per page
+        let currentPage = 1;
+
+        function showUsers(page) {
+            const users = document.querySelectorAll('.user-row');
+            users.forEach((user, index) => {
+                if (index < page * itemsPerPage) {
+                    user.classList.remove('hidden');
+                }
+            });
+
+            if (page * itemsPerPage >= users.length) {
+                document.getElementById('view-more').classList.add('hidden');
+            }
+        }
+
+        document.getElementById('view-more').addEventListener('click', function () {
+            currentPage++;
+            showUsers(currentPage);
+        });
+
+        showUsers(currentPage);
+    });
+</script>

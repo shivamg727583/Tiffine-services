@@ -1,0 +1,130 @@
+<%- include('./partials/header')  %>
+
+<main class="container mx-auto px-6 py-24 min-h-[80vh]">
+    <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Sign In to Your Account</h2>
+      <div id="alert" class="alert alert-danger"></div>
+      <div class="mb-6 text-center">
+        <button id="vendorLoginBtn" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500">Vendor Login</button>
+        <button id="userLoginBtn" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500">User Login</button>
+      </div>
+      
+      <form id="vendorLoginForm" class="hidden fade-in" action="/vendors/login" method="POST">
+        <div class="mb-4">
+          <label for="vendorId" class="block text-gray-700">Vendor ID</label>
+          <input type="text" id="vendorId" name="vendorId" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" >
+        </div>
+        <div class="mb-4">
+          <label for="vendorEmail" class="block text-gray-700">Vendor Email</label>
+          <input type="email" id="vendorEmail" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+        </div>
+        <div class="mb-4">
+          <label for="vendorPassword" class="block text-gray-700">Password</label>
+          <input type="password" id="vendorPassword" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+        </div>
+        <div class="mb-4 text-center">
+          <button type="submit" class="w-full px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500">Sign In</button>
+        </div>
+      </form>
+  
+      <form id="userLoginForm" class="hidden fade-in" action="/users/login" method="POST">
+        <div class="mb-4">
+          <label for="userEmail" class="block text-gray-700">Email Address</label>
+          <input type="email" id="userEmail" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+        </div>
+        <div class="mb-4">
+          <label for="userPassword" class="block text-gray-700">Password</label>
+          <input type="password" id="userPassword" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+        </div>
+        <div class="mb-4 text-center">
+          <button type="submit" class="w-full px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500">Sign In</button>
+        </div>
+      </form>
+  
+      <div class="text-center">
+        <p class="text-gray-600">Don't have an account? <a href="/users/register" class="text-orange-500 hover:text-orange-400">Sign Up</a></p>
+        <p class="text-gray-600">Admin login <a href="/admin/login" class="text-orange-500 hover:text-orange-400">Login</a></p>
+
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const vendorLoginBtn = document.getElementById('vendorLoginBtn');
+      const userLoginBtn = document.getElementById('userLoginBtn');
+      const vendorLoginForm = document.getElementById('vendorLoginForm');
+      const userLoginForm = document.getElementById('userLoginForm');
+      const alertBox = document.getElementById('alert');
+  
+      vendorLoginBtn.addEventListener('click', function() {
+        vendorLoginForm.classList.remove('hidden');
+        userLoginForm.classList.add('hidden');
+        vendorLoginForm.classList.add('fade-in');
+        userLoginForm.classList.remove('fade-in');
+        alertBox.classList.remove('show');
+      });
+  
+      userLoginBtn.addEventListener('click', function() {
+        userLoginForm.classList.remove('hidden');
+        vendorLoginForm.classList.add('hidden');
+        userLoginForm.classList.add('fade-in');
+        vendorLoginForm.classList.remove('fade-in');
+        alertBox.classList.remove('show');
+      });
+  
+      function showAlert(message) {
+        alertBox.textContent = message;
+        alertBox.classList.add('show');
+        setTimeout(() => {
+          alertBox.classList.remove('show');
+        }, 3000);
+      }
+  
+      function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+  
+      function validateForm(form) {
+        const inputs = form.querySelectorAll('input[required]');
+        for (let input of inputs) {
+          if (!input.value.trim()) {
+            showAlert('All fields are required.');
+            return false;
+          }
+          if (input.type === 'email' && !validateEmail(input.value)) {
+            showAlert('Invalid email address.');
+            return false;
+          }
+        }
+        return true;
+      }
+  
+      vendorLoginForm.addEventListener('submit', function(event) {
+        if (!validateForm(vendorLoginForm)) {
+          event.preventDefault();
+        }
+      });
+  
+      userLoginForm.addEventListener('submit', function(event) {
+        if (!validateForm(userLoginForm)) {
+          event.preventDefault();
+        }
+      });
+    });
+  </script>
+  <script src="/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('./partials/footer')  %>

@@ -1,0 +1,84 @@
+<%- include('../partials/header')  %>
+
+<!-- Add Food Form -->
+<div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg mt-24">
+    <h2 class="text-2xl font-bold mb-6 text-center">Add New Food Item</h2>
+    <form action="/vendors/addFoods" method="POST" enctype="multipart/form-data">
+        <!-- Food Name -->
+        <div class="mb-4">
+            <label for="food_name" class="block text-gray-700 font-bold mb-2">Food Name:</label>
+            <input type="text" id="food_name" name="food_name" placeholder="Enter food name"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+        </div>
+
+        <!-- Food Description -->
+        <div class="mb-4">
+            <label for="food_description" class="block text-gray-700 font-bold mb-2">Description:</label>
+            <textarea id="food_description" name="food_description" rows="3"
+                placeholder="Enter food description"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 resize-none" required></textarea>
+        </div>
+
+        <!-- Cuisine Type -->
+        <div class="mb-4">
+            <label for="cuisine_type" class="block text-gray-700 font-bold mb-2">Cuisine Type:</label>
+            <select id="cuisine_type" name="cuisine_type"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                <option value="">Select Cuisine</option>
+                <option value="Indian">Indian</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Continental">Continental</option>
+                <option value="Italian">Italian</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <!-- Category -->
+        <div class="mb-4">
+            <label for="category" class="block text-gray-700 font-bold mb-2">Category:</label>
+            <select id="category" name="category"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                <option value="">Select Category</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Non-Vegetarian">Non-Vegetarian</option>
+            </select>
+        </div>
+
+        <!-- Meal Type -->
+        <div class="mb-4">
+            <label for="mealType" class="block text-gray-700 font-bold mb-2">Meal Type:</label>
+            <select id="mealType" name="mealType"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                <option value="">Select Meal Type</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-4">
+            <label for="price" class="block text-gray-700 font-bold mb-2">Price (₹):</label>
+            <input type="number" id="price" name="price" placeholder="Enter price"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+        </div>
+
+        <!-- Food Image Upload -->
+        <div class="mb-6">
+            <label for="food_image" class="block text-gray-700 font-bold mb-2">Upload Image:</label>
+            <input type="file" id="food_image" name="food_image" accept="image/*"
+                class="w-full text-gray-700 p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit"
+                class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                Add Food
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src="/js/script.js"></script>

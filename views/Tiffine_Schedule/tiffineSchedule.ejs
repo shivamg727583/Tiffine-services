@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+
+  <div class="container mx-auto mt-10 ">
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+      <h1 class="text-2xl font-semibold mb-6 text-center">Create Tiffin Schedule</h1>
+      
+      <form action="/vendors/tiffin-schedule" method="POST">
+        <!-- Vendor ID -->
+        <div class="mb-4">
+          <label for="vendorId" class="block text-sm font-medium text-gray-700">Vendor</label>
+          <select id="vendorId" name="vendorId" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <% vendors.forEach(function(vendor) { %>
+              <option value="<%= vendor._id %>"><%= vendor.owner_name %></option>
+            <% }); %>
+          </select>
+        </div>
+        
+        <!-- Week Start Date -->
+        <div class="mb-4">
+          <label for="week_start_date" class="block text-sm font-medium text-gray-700">Week Start Date</label>
+          <input type="date" id="week_start_date" name="week_start_date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+        
+        <!-- Weekly Schedule -->
+        <div id="schedule-section">
+          <h3 class="text-lg font-semibold mb-2">Weekly Schedule</h3>
+          <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].forEach(function(day, index) { %>
+            <div class="border border-gray-200 p-4 rounded-lg mb-4">
+              <h4 class="text-sm font-medium mb-2"><%= day %></h4>
+              
+              <!-- Meal Type -->
+              <div class="mb-2">
+                <label for="meal_type_<%= index %>" class="block text-sm text-gray-700">Meal Type</label>
+                <select id="meal_type_<%= index %>" name="weekly_schedule[<%= index %>][meal_type]" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                </select>
+              </div>
+              
+              <!-- Menu Items -->
+              <div class="mb-2">
+                <label for="menu_<%= index %>" class="block text-sm text-gray-700">Menu Items</label>
+                <select id="menu_<%= index %>" name="weekly_schedule[<%= index %>][menu][]" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <% foods.forEach(function(food) { %>
+                    <option value="<%= food._id %>"><%= food.food_name %></option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <!-- Availability -->
+              <div class="mb-2">
+                <label for="availability_<%= index %>" class="block text-sm text-gray-700">Availability</label>
+                <input type="number" id="availability_<%= index %>" name="weekly_schedule[<%= index %>][availability]" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter number of tiffins" required>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center">
+          <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            Create Schedule
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

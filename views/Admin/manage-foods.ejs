@@ -1,0 +1,66 @@
+<%- include('../partials/header')  %>
+
+    <div class="container mx-auto px-4 py-8 mt-24 relative">
+        <a href="/admin" class="bg-gray-200 p-1 rounded-full"><i class="ri-arrow-left-line"></i></a>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Manage Foods</h1>
+
+        <% if (vendors.length > 0) { %>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg shadow-md">
+                    <thead>
+                        <tr class="bg-gray-800 text-white">
+                            <th class="w-1/4 py-3 px-4 text-left">Vendor Name</th>
+                            <th class="w-1/4 py-3 px-4 text-left">Food Name</th>
+                            <th class="w-1/4 py-3 px-4 text-left">Category</th>
+                            <th class="w-1/4 py-3 px-4 text-left">Price</th>
+                            <th class="w-1/6 py-3 px-4 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <% let foodCounter = 0; %>
+                        <% vendors.forEach(vendor => { %>
+                            <% vendor.foodItems.forEach(food => { %>
+                                <% foodCounter++; %>
+                                <tr class="food-row border-b <% if (foodCounter > 10) { %>hidden<% } %> hover:bg-gray-100">
+                                    <td class="py-3 px-4"><%= vendor.owner_name %></td>
+                                    <td class="py-3 px-4"><%= food.food_name %></td>
+                                    <td class="py-3 px-4"><%= food.category %></td>
+                                    <td class="py-3 px-4">₹ <%= food.price.toFixed(2) %></td>
+                                    <td class="py-3 px-4 text-center">
+                                        <a href="/admin/delete-food/<%= food.id %>" class="text-red-500 hover:underline" onclick="return confirm('Are you sure you want to delete this food item?');">Delete</a>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+
+            <% if (foodCounter > 10) { %>
+                <div class="text-center mt-8">
+                    <button id="view-more-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="showMoreFoods()">View More</button>
+                </div>
+            <% } %>
+        <% } else { %>
+            <p class="text-center text-gray-600 mt-8">No food items available.</p>
+        <% } %>
+    </div>
+
+
+    <script>
+        // JavaScript to handle the "View More" functionality
+        function showMoreFoods() {
+            const hiddenRows = document.querySelectorAll('.food-row.hidden');
+            const rowsToShow = 5; // Number of rows to show each time
+
+            for (let i = 0; i < rowsToShow && hiddenRows.length > 0; i++) {
+                hiddenRows[i].classList.remove('hidden');
+            }
+
+            // Hide the "View More" button if no more rows are hidden
+            if (document.querySelectorAll('.food-row.hidden').length === 0) {
+                document.getElementById('view-more-btn').classList.add('hidden');
+            }
+        }
+    </script>
+<%- include('../partials/footer')  %>

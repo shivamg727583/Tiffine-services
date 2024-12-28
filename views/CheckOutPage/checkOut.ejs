@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+<div class="max-w-xl mx-auto bg-white p-8 rounded shadow mt-24">
+  <h2 class="text-2xl font-bold mb-4">Checkout</h2>
+  
+  <!-- Cart Receipt -->
+  <h3 class="text-xl font-bold mb-4">Your Cart</h3>
+  <ul class="mb-6">
+    <% cart.forEach(item => { %>
+      <li class="flex justify-between border-b pb-2 mb-2">
+        <span><%= item.productId.food_name %> (x<%= item.quantity %>)</span>
+        <span>$<%= (item.productId.price * item.quantity).toFixed(2) %></span>
+      </li>
+    <% }) %>
+  </ul>
+
+  <div class="flex justify-between text-lg font-bold">
+    <span>Total Price:</span>
+    <span>$<%= totalPrice.toFixed(2) %></span>
+  </div>
+
+  <!-- Payment Form -->
+  <form id="payment-form" class="space-y-6 mt-6" action="/checkout" method="POST">
+    <!-- Hidden fields to include cart data -->
+    <input type="hidden" name="cartItems" value='<%= JSON.stringify(cart.products) %>'>
+
+    <!-- WhatsApp Number Input -->
+    <div>
+      <label for="whatsapp" class="block font-medium text-gray-700">WhatsApp Number</label>
+      <input type="text" id="whatsapp" name="whatsapp" class="mt-1 block p-2  w-full rounded-md  border-[2px] border-gray-600" placeholder="+1234567890" required />
+    </div>
+
+    <!-- Display Total Price -->
+    <div class="flex justify-between text-lg font-bold mt-4">
+      <span>Total Amount:</span>
+      <span>$<%= totalPrice.toFixed(2) %></span>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded">Submit Order</button>
+  </form>
+</div>
+
+<script>
+  // You can add any necessary JavaScript for validation or payment processing here.
+</script>
+<%- include('../partials/footer') %>

@@ -1,0 +1,152 @@
+<%- include('./partials/header') %>
+
+<section class="hero relative flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.pinimg.com/564x/3e/47/e1/3e47e1fad662b2ec548a00322b480c9b.jpg');">
+  <div class="absolute inset-0 bg-black opacity-60"></div>
+  <div class="container mx-auto px-4 relative z-10 text-center text-white">
+    <h1 class="text-4xl md:text-6xl font-bold leading-tight">Delicious Home-Cooked Meals Delivered to Your Door</h1>
+    <p class="mt-4 text-lg md:text-2xl">Find vendors near you offering fresh, home-cooked meals.</p>
+    
+    <div class="mt-8 flex justify-center">
+      <input type="text" id="location" placeholder="Enter pin code" class="px-4 py-2 w-64 md:w-80 rounded-l-full text-gray-700 focus:outline-none" maxlength="6" minlength="6">
+      <button onclick="searchVendors()" class="px-6 py-2 rounded-r-full bg-blue-600 text-white hover:bg-blue-700 transition duration-300">Search Vendors</button>
+    </div>
+
+    <!-- Vendor List Section -->
+    <div id="vendors" class="mt-6 text-left max-w-screen-xl mx-auto  bg-gray-100 rounded-lg shadow-lg p-6 text-gray-800 hidden transition-all duration-400 ease-in-out absolute top-full mt-4 left-1/2 transform -translate-x-1/2">
+      <h2 class="text-lg font-bold mb-4 flex items-center justify-between gap-6">
+        <span>Vendors Near You</span>
+        <span id="close-btn" class="bg-gray-200 rounded-full p-1 cursor-pointer">
+          <i class="ri-close-line"></i>
+        </span>
+      </h2>
+      <!-- Dynamic content will be injected here -->
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Features Section -->
+<section class="features py-20 bg-gray-100">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap -mx-4">
+      <div class="w-full md:w-1/3 px-4 mb-8 md:mb-0">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+          <div class="img mb-4 h-48 overflow-hidden rounded-2xl border-2 border-gray-200">
+            <img src="https://i.pinimg.com/564x/3e/47/e1/3e47e1fad662b2ec548a00322b480c9b.jpg" alt="Customizable Meals Icon" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-semibold">Customizable Meals</h3>
+          <p class="mt-2 text-gray-600">Tailor your meals to suit your dietary preferences and taste buds.</p>
+        </div>
+      </div>
+      <div class="w-full md:w-1/3 px-4 mb-8 md:mb-0">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+          <div class="img mb-4 h-48 overflow-hidden rounded-2xl border-2 border-gray-200">
+            <img src="https://i.pinimg.com/564x/05/5c/a4/055ca48752dfa4c282120deb73aa1ad6.jpg" alt="Eco-Friendly Packaging Icon" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-semibold">Eco-Friendly Packaging</h3>
+          <p class="mt-2 text-gray-600">Our packaging is environmentally friendly and sustainable.</p>
+        </div>
+      </div>
+      <div class="w-full md:w-1/3 px-4">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+          <div class="img mb-4 h-48 overflow-hidden rounded-2xl border-2 border-gray-200">
+            <img src="https://i.pinimg.com/564x/7e/70/fd/7e70fd454964428203f9485b85603a2d.jpg" alt="Flexible Subscription Icon" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-semibold">Flexible Subscription Plans</h3>
+          <p class="mt-2 text-gray-600">Choose from a variety of subscription plans that fit your schedule.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-semibold text-center mb-10">What Our Customers Say</h2>
+    <div class="flex flex-wrap -mx-4">
+      <div class="w-full md:w-1/3 px-4 mb-8">
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://i.pinimg.com/736x/6a/81/6a/6a816ae4d89619bc368d119bef3f350f.jpg" alt="Customer Photo" class="w-16 h-16 rounded-full mx-auto mb-4">
+          <blockquote class="text-gray-700">"Amazing service and delicious meals!"</blockquote>
+          <div class="rating text-yellow-500 mt-2">★★★★★</div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/3 px-4 mb-8">
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://i.pinimg.com/736x/5e/96/4b/5e964b4d1a6a514bf141c694f5037537.jpg" alt="Customer Photo" class="w-16 h-16 rounded-full mx-auto mb-4">
+          <blockquote class="text-gray-700">"Healthy and tasty, highly recommend!"</blockquote>
+          <div class="rating text-yellow-500 mt-2">★★★★★</div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/3 px-4 mb-8">
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://i.pinimg.com/736x/6a/81/6a/6a816ae4d89619bc368d119bef3f350f.jpg" alt="Customer Photo" class="w-16 h-16 rounded-full mx-auto mb-4">
+          <blockquote class="text-gray-700">"Amazing service and delicious meals!"</blockquote>
+          <div class="rating text-yellow-500 mt-2">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<%- include('./partials/footer') %>
+
+<script>
+  function searchVendors() {
+    const pincode = document.getElementById('location').value;
+    if (pincode.length !== 6) {
+      alert('Please enter a valid 6-digit pincode.');
+      return;
+    }
+  
+    // Send request to server to get vendors based on pincode
+    fetch(`/search-vendors?pincode=${pincode}`)
+      .then(response => response.json())
+      .then(data => {
+        const vendorsDiv = document.getElementById('vendors');
+        vendorsDiv.innerHTML = ''; // Clear previous results
+        vendorsDiv.innerHTML += `
+          <h2 class="text-lg font-bold mb-4 flex items-center justify-between">
+            <span>Vendors Near You</span>
+            <span id="close-btn" class="bg-gray-200 rounded-full p-1 cursor-pointer">
+              <i class="ri-close-line"></i>
+            </span>
+          </h2>
+        `;
+  
+        if (data.length > 0) {
+          data.forEach(vendor => {
+            const vendorElement = document.createElement('div');
+            vendorElement.className = 'w-full p-2 md-4 border-b border-gray-200 flex items-center justify-between gap-6 transition-all duration-400';
+            vendorElement.innerHTML = `<div>
+              <h2 class="text-4 md:text-md font-bold">${vendor.business_name}</h2>
+              <h3 class="text-4 md:text-md font-semibold">${vendor.owner_name}</h3>
+            </div>
+            <button class="mt-2 px-2 md:px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-800 cursor-pointer" onclick="selectVendor('${vendor._id}')"><span class="hidden md:block">Select Vendor</span><span class="md:hidden">View</span></button>`;
+            vendorsDiv.appendChild(vendorElement);
+          });
+          vendorsDiv.classList.remove('hidden'); // Show results
+        } else {
+          vendorsDiv.innerHTML += '<p>No vendors found for this pincode.</p>';
+          vendorsDiv.classList.remove('hidden');
+        }
+  
+        // Add event listener after the close button is added to the DOM
+        document.getElementById('close-btn').addEventListener("click", () => {
+          vendorsDiv.classList.add('hidden');
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching vendors:', error);
+      });
+  }
+  
+  function selectVendor(vendorId) {
+    // Redirect to another page or handle vendor selection as needed
+    window.location.href = `/vendor/${vendorId}`;
+  }
+  </script>
+  

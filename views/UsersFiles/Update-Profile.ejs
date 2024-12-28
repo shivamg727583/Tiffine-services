@@ -1,0 +1,135 @@
+<%- include('../partials/header')  %>
+
+<main class="mt-20 py-6">
+    <form enctype="multipart/form-data" class="max-w-lg mx-auto bg-zinc-300 rounded-xl p-2"  action="/users/profile/update/<%= user._id  %>" method="POST">
+        <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">Update your Account 🎉</h2>
+        
+          
+          <!-- Personal Details Section -->
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Personal Details 🧑</h3>
+
+            <div class="text-center ">
+                <label for="profile_pic" class="block text-gray-700 font-bold mb-2 relative ">Profile Picture:
+                <img src="data:image/jpeg;base64,<%= user.profile_pic %>" alt="" class="h-32 w-32 rounded-full mx-auto cursor-pointer mb-4 object-cover bg-gray-200">  
+                <i class="ri-add-fill text-zinc-200 absolute bottom-1 right-[43%] leading-tight font-light text-3xl"></i>
+              </label>
+                <input type="file" id="profile_pic" name="profile_pic" class="block hidden w-full text-sm text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                
+                <p class="text-gray-500 text-xs mt-1">Allowed file formats: .jpg, .jpeg, .png</p>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label for="first_name" class="block text-gray-700">First Name *</label>
+                <input type="text" id="first_name" name="first_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required minlength="2" value=<%= user.first_name  %>>
+              </div>
+              <div>
+                <label for="middle_name" class="block text-gray-700">Middle Name</label>
+                <input type="text" id="middle_name" name="middle_name"    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"  value=<%= user.middle_name %>>
+              </div>
+              <div>
+                <label for="last_name" class="block text-gray-700">Last Name *</label>
+                <input type="text" id="last_name" name="last_name"  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required minlength="2" value=<%= user.last_name  %>>
+              </div>
+             
+            </div>
+          </div>
+    
+          <!-- Contact Information Section -->
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Contact Information 📞</h3>
+            <div class="space-y-4">
+              <div>
+                <label for="phone1" class="block text-gray-700">Phone Number 1 *</label>
+                <input type="tel" id="phone1" name="phone1"  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required pattern="^\d{10}$" title="Phone Number must be 10 digits" value=<%= user.phone1  %>>
+              </div>
+              <div>
+                <label for="phone2" class="block text-gray-700">Phone Number 2</label>
+                <input type="tel" id="phone2" name="phone2"  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" pattern="^\d{10}$" title="Phone Number must be 10 digits" value=<%= user.phone2  %>>
+              </div>
+              <div>
+                <label for="whatsapp" class="block text-gray-700">WhatsApp Number *</label>
+                <input type="tel" id="whatsapp" name="whatsapp" value=<%= user.whatsapp  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required pattern="^\d{10}$" title="WhatsApp Number must be 10 digits">
+              </div>
+              <div>
+                <label for="email" class="block text-gray-700">Email Address *</label>
+                <input type="email" id="email" name="email" value=<%= user.email  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required pattern="^\S+@\S+\.\S+$" title="Please enter a valid email address">
+              </div>
+            </div>
+          </div>
+    
+          <!-- Address Section -->
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Address 🏠</h3>
+            <div class="space-y-4">
+              <div>
+                <label for="house_number" class="block text-gray-700">House Number *</label>
+                <input type="text" id="house_number" name="house_number" value=<%= user.house_number  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              <div>
+                <label for="street" class="block text-gray-700">Street *</label>
+                <input type="text" id="street" name="street" value=<%= user.street  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              <div>
+                <label for="area" class="block text-gray-700">Area *</label>
+                <input type="text" id="area" name="area" value=<%= user.area  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              <div>
+                <label for="colony" class="block text-gray-700">Colony *</label>
+                <input type="text" id="colony" name="colony" value=<%= user.colony  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              <div>
+                <label for="landmark" class="block text-gray-700">Landmark</label>
+                <input type="text" id="landmark" name="landmark" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value=<%= user.landmark  %> >
+              </div>
+              <div>
+                <label for="city" class="block text-gray-700">City *</label>
+                <input type="text" id="city" name="city" value=<%= user.city  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              <div>
+                <label for="state" class="block text-gray-700">State *</label>
+                <input type="text" id="state" name="state" value=<%= user.state  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              <div>
+                <label for="pincode" class="block text-gray-700">Pincode *</label>
+                <input type="text" id="pincode" name="pincode" value=<%= user.pincode  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required pattern="^\d{6}$" title="Pincode must be 6 digits">
+              </div>
+              <div>
+                <label for="country" class="block text-gray-700">Country *</label>
+                <input type="text" id="country" name="country" value=<%= user.country  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              
+            </div>
+          </div>
+    
+          <!-- Additional Information Section -->
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Additional Information 🌐</h3>
+            <div class="space-y-4">
+              
+            
+              <div>
+                <label for="occupation" class="block text-gray-700">Occupation *</label>
+                <input type="text" id="occupation" name="occupation" value=<%= user.occupation  %> class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+              </div>
+              <div>
+                <label for="company" class="block text-gray-700">Company</label>
+                <input type="text" id="company" name="company"  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value=<%= user.company  %>>
+              </div>
+              <div>
+                <label for="work_city" class="block text-gray-700">Work City</label>
+                <input type="text" id="work_city" name="work_city"  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value=<%= user.work_city  %>>
+              </div>
+            </div>
+          </div>
+    
+          <div class="text-center">
+            <button type="submit" class="w-full px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-400">Update</button>
+          </div>
+       
+    </form>
+
+</main>
+
+<%- include('../partials/footer')  %>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" x-data="menu()">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiffin Service</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    /* Custom styles for toggling the mobile menu */
+    .menu-toggle {
+      cursor: pointer;
+    }
+    .nav-menu.active {
+      display: flex !important;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-gray-900 bg-gray-100">
+
+<!-- ///// logics /////// -->
+<% var isLogged = typeof isLogged === 'undefined' ? false : true %>
+<% var isVendorLogged = typeof isVendorLogged === 'undefined' ? false : true %>
+<% var adminLogged = typeof adminLogged === 'undefined' ? false : true %>
+<% var cartcount = typeof cartcount === 'undefined' ? 0 : cartcount %>
+
+
+
+<header class="bg-white shadow-md">
+  <div class="container mx-auto flex justify-between items-center p-4">
+    <div class="flex items-center gap-2">
+      <!-- Mobile Menu Button -->
+      <button class="menu-toggle md:hidden text-2xl text-gray-600 focus:outline-none" aria-label="Toggle Menu">&#9776;</button>
+      <span class="text-2xl font-bold text-orange-500">Tiffin Service</span>
+    </div>
+
+    
+    <nav class="nav-menu hidden md:flex space-x-4">
+      <a href="/" class="hover:text-orange-500">Home</a>
+      <% if(isVendorLogged) { %>
+        <a href="/vendors/dashboard" class="hover:text-orange-500">Dashboard</a>
+      <% } else { %>
+        <a href="/menu" class="hover:text-orange-500">Menu</a>
+        <a href="#" class="hover:text-orange-500">Subscription Plans</a>
+      <% } %>
+      <a href="/contacts" class="hover:text-orange-500">Contact Us</a>
+    </nav>
+
+    
+    <nav class="nav-menu md:hidden flex flex-col items-start space-y-2 absolute bg-white p-4 shadow-md rounded-lg z-50 hidden">
+      <a href="/" class="hover:text-orange-500">Home</a>
+     <%  if(isVendorLogged) { %>
+        <a href="/vendors/dashboard" class="hover:text-orange-500">Dashboard</a>
+      <% } else { %>
+        <a href="/menu" class="hover:text-orange-500">Menu</a>
+        <a href="#" class="hover:text-orange-500">Subscription Plans</a>
+      <% } %>
+      <a href="/contacts" class="hover:text-orange-500">Contact Us</a>
+      
+        <a href="/users/profile" class="hover:text-orange-500">Profile</a>
+        <a href="/users/logout" class="hover:text-orange-500">Logout</a>
+     
+    </nav>
+
+    
+    <% var error = typeof error !== 'undefined' ? error : "" %>
+    <% if(error != "") { %>
+      <div class="notify notify-danger bg-red-100 text-red-700 px-4 py-2 rounded-lg" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+    <% var success = typeof success === 'undefined' ? "" : success %>
+    <% if(success != "") { %>
+      <div class="notify notify-success bg-green-100 text-green-700 px-4 py-2 rounded-lg" role="alert">
+        <%= success %>
+      </div>
+    <% } %>
+
+    
+    <div class="auth-buttons flex items-center space-x-4">
+      <% if (isLogged) { %>
+        <a href="/users/profile" class="hidden md:block bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Profile</a>
+        <a href="/users/cart">
+        <div class="cart flex items-center gap-2 bg-orange-400 rounded-lg px-2 py-1">
+          <i class="ri-shopping-cart-fill text-white text-md md:text-xl"></i>
+          <span class="cart_count w-[20px] h-[20px] md:w-[30px] md:h-[30px] bg-orange-500 text-white font-semibold flex items-center justify-center rounded-full shadow-md"><%= cartcount %></span>
+        </div>
+       </a>
+        <a href="/users/logout" class="bg-red-500 hidden md:block hover:bg-red-600 text-white py-2 px-4 rounded-lg">Logout</a>
+      <% } else if(isVendorLogged) { %>
+        <a href="/vendors/profile" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Profile</a>
+        <a href="/vendors/logout" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg">Logout</a>
+     
+        <% } else if(adminLogged){ %>
+   
+     
+        <% } else { %>
+        <a href="/login" class="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Sign In</a>
+        <a href="/users/register" class="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Sign Up</a>
+      <% } %>
+    </div>
+  </div>
+</header>
+
+
+
